@@ -199,21 +199,25 @@
 
   /* ─── Plugin install ─────────────────────────────────────────────── */
   function install(hook) {
-    /* Resolve options once, early */
+    /* Resolve options once at install time (config is already set). */
     var opts = Object.assign(
       { position: 'top-right', transform: 'uppercase' },
       (window.$docsify && window.$docsify.languageHighlight) || {}
     );
 
-    /* Inject everything immediately at install time */
+    /* Inject everything immediately at install time. */
     injectBadgeStyles();
     injectPrismThemes(opts);
     injectPrismLanguages(opts);
 
     hook.doneEach(function () {
-      document.querySelectorAll('.markdown-section pre').forEach(function (pre) {
-        if (pre.querySelector('.docsify-language-label')) return;
-
+      /*
+       * Use :not([data-dlh]) so the selector itself is the deduplication guard.
+       * This is more reliable than querying for a child element because Prism
+       * can re-render the <code> contents (wiping children) while leaving the
+       * <pre> element in place, which would fool a child-based guard.
+       */
+      document.querySelectorAll('.markdown-section pre:not([data-dlh])').forEach(function (pre) {
         var lang = pre.getAttribute('data-lang');
         if (!lang) {
           var code = pre.querySelector('code');
@@ -222,6 +226,10 @@
             lang = m ? m[1] : null;
           }
         }
+
+        /* Mark processed regardless, so we never visit this <pre> again. */
+        pre.setAttribute('data-dlh', lang || 'none');
+
         if (!lang || lang === 'text' || lang === 'plain') return;
 
         var label = document.createElement('span');
