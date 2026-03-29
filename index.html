@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no, viewport-fit=cover">
+  <meta name="description" content="docsify-language-highlight — language badge labels for Docsify 5 code blocks">
+  <title>docsify-language-highlight</title>
+
+  <!-- Docsify 5 theme -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@^5.0.0-rc/dist/themes/core.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@^5.0.0-rc/dist/themes/addons/core-dark.min.css" media="(prefers-color-scheme: dark)">
+</head>
+
+<body>
+  <div id="app"></div>
+
+  <script>
+    window.$docsify = {
+      name: 'docsify-language-highlight',
+      repo: 'https://github.com/gllmAR/docsify-language-highlight',
+      loadSidebar: false,
+      auto2top: true,
+      homepage: 'README.md',
+    };
+  </script>
+
+  <!-- Docsify 5 core -->
+  <script src="https://cdn.jsdelivr.net/npm/docsify@^5.0.0-rc/dist/docsify.min.js"></script>
+
+  <!-- docsify-language-highlight — injects Prism themes + grammars automatically -->
+  <script src="./docsify-language-highlight.js"></script>
+</body>
+
+</html>
