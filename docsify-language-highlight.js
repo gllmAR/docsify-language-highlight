@@ -142,6 +142,12 @@
   }
 
   /* ─── Inject Prism language grammars (JS) ────────────────────────── */
+  /*
+   * Scripts are loaded ONE AT A TIME via onload callbacks.
+   * This guarantees execution order, which is required for grammars that
+   * extend others (e.g. json → json5, c → cpp, turtle → sparql, basic → vbnet).
+   * Parallel injection (forEach + appendChild) does NOT guarantee order.
+   */
   function injectPrismLanguages(opts) {
     if (opts.prismLanguages === false) return;
 
@@ -153,14 +159,21 @@
       langs = langs.concat(opts.extraLanguages);
     }
 
-    langs.forEach(function (lang) {
-      var id = 'dlh-prism-lang-' + lang;
-      if (document.getElementById(id)) return;
-      var s  = document.createElement('script');
-      s.id   = id;
-      s.src  = PRISM_CDN + lang + '.min.js';
+    function loadNext(index) {
+      if (index >= langs.length) return;
+      var lang = langs[index];
+      var id   = 'dlh-prism-lang-' + lang;
+      if (document.getElementById(id)) {
+        loadNext(index + 1);
+        return;
+      }
+      var s    = document.createElement('script');
+      s.id     = id;
+      s.src    = PRISM_CDN + lang + '.min.js';
+      s.onload = s.onerror = function () { loadNext(index + 1); };
       document.body.appendChild(s);
-    });
+    }
+    loadNext(0);
   }
 
   /* ─── Badge CSS ──────────────────────────────────────────────────── */
