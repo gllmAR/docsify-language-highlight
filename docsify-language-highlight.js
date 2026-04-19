@@ -228,10 +228,21 @@
       (window.$docsify && window.$docsify.languageHighlight) || {}
     );
 
-    /* Inject everything immediately at install time. */
+    /* Inject badge CSS and Prism themes immediately — they are just <link>/<style>
+     * tags and have no dependency on Docsify's Prism instance. */
     injectBadgeStyles();
     injectPrismThemes(opts);
-    injectPrismLanguages(opts);
+
+    /*
+     * Grammar scripts MUST start only after Docsify (and its bundled Prism) has
+     * fully initialised. Starting earlier causes Docsify 5's dependency checker
+     * to fire before Prism.languages.javascript / clike are registered, producing
+     * the "required dependencies not satisfied" warning for typescript etc.
+     * hook.init fires once, after all plugins are installed and Docsify is ready.
+     */
+    hook.init(function () {
+      injectPrismLanguages(opts);
+    });
 
     hook.doneEach(function () {
       /*
