@@ -163,17 +163,17 @@ The badge inherits Docsify CSS custom properties automatically. Override its app
 
 | Category | Languages |
 |---|---|
-| Shell / CLI | `bash`, `shell-session`, `powershell`, `batch`, `fish` |
-| Web / Frontend | `typescript`, `jsx`, `tsx`, `vue`, `svelte`, `scss`, `sass`, `less`, `css-extras`, `json`, `json5`, `graphql` |
+| Shell / CLI | `bash`, `shell-session`, `powershell`, `batch` |
+| Web / Frontend | `typescript`, `jsx`, `tsx`, `scss`, `sass`, `less`, `css-extras`, `json`, `json5`, `graphql` |
 | Data formats | `yaml`, `toml`, `ini` |
 | Systems | `c`, `cpp`, `rust`, `go`, `wasm`, `asm6502`, `nasm` |
 | JVM | `java`, `kotlin`, `scala`, `groovy` |
 | Scripting | `python`, `ruby`, `php`, `perl`, `lua`, `r` |
 | Mobile / Desktop | `swift`, `dart`, `objectivec` |
 | Functional | `haskell`, `elixir`, `erlang`, `clojure`, `ocaml`, `fsharp`, `scheme` |
-| .NET | `csharp`, `vbnet` |
-| Data / Query | `sql`, `sparql`, `cypher`, `promql` |
-| Config / Infra | `docker`, `nginx`, `apacheconf`, `hcl`, `nix`, `makefile`, `cmake`, `editorconfig`, `terraform` |
+| .NET | `basic`, `csharp`, `vbnet` |
+| Data / Query | `sql`, `turtle`, `sparql`, `cypher`, `promql` |
+| Config / Infra | `docker`, `nginx`, `apacheconf`, `hcl`, `nix`, `makefile`, `cmake`, `editorconfig` |
 | Markup / Docs | `markdown`, `latex`, `asciidoc` |
 | Source control | `git`, `diff` |
 | Misc | `regex`, `vim`, `http`, `uri`, `coffeescript`, `matlab`, `julia`, `gdscript`, `protobuf` |

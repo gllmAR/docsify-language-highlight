@@ -25,12 +25,22 @@
   var THEMES_CDN   = '//cdn.jsdelivr.net/npm/prism-themes@1/themes/';
 
   /* ─── Default Prism language list ────────────────────────────────── */
-  /* Prism built-ins (markup/html, css, clike, javascript) are excluded. */
+  /*
+   * Prism built-ins (markup/html, css, clike, javascript) are already loaded
+   * by Docsify and are excluded here.
+   *
+   * Ordering matters for grammars that extend others:
+   *   basic  → must precede vbnet
+   *   turtle → must precede sparql
+   *
+   * Removed (no published prismjs component file):
+   *   fish, vue, svelte, terraform
+   */
   var DEFAULT_LANGUAGES = [
     // Shell / CLI
-    'bash', 'shell-session', 'powershell', 'batch', 'fish',
+    'bash', 'shell-session', 'powershell', 'batch',
     // Web / Frontend
-    'typescript', 'jsx', 'tsx', 'vue', 'svelte',
+    'typescript', 'jsx', 'tsx',
     'scss', 'sass', 'less', 'css-extras',
     'json', 'json5', 'graphql',
     'yaml', 'toml', 'ini',
@@ -45,10 +55,10 @@
     'swift', 'dart', 'objectivec',
     // Functional
     'haskell', 'elixir', 'erlang', 'clojure', 'ocaml', 'fsharp', 'scheme',
-    // .NET
-    'csharp', 'vbnet',
-    // Data / Query
-    'sql', 'sparql', 'cypher', 'promql',
+    // .NET  (basic must load before vbnet)
+    'csharp', 'basic', 'vbnet',
+    // Data / Query  (turtle must load before sparql)
+    'sql', 'turtle', 'sparql', 'cypher', 'promql',
     // Config / Infra
     'docker', 'nginx', 'apacheconf', 'hcl', 'nix',
     'makefile', 'cmake', 'editorconfig',
@@ -59,7 +69,7 @@
     // Misc
     'regex', 'vim', 'http', 'uri',
     'coffeescript', 'matlab', 'julia', 'gdscript',
-    'protobuf', 'terraform',
+    'protobuf',
   ];
 
   /* ─── Friendly display names ─────────────────────────────────────── */
